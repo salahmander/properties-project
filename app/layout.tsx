@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@/assets/styles/globals.css";
 
 import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
 
 type MainLayoutPropsType = Readonly<{ children: React.ReactNode }>;
 
@@ -19,6 +20,7 @@ const MainLayout = ({ children }: MainLayoutPropsType) => {
       <body>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
