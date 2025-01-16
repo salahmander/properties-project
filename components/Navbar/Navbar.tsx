@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
-
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 import logo from "@/assets/images/logo-white.png";
 
@@ -14,6 +15,8 @@ import DesktopMenu from "./DesktopMenu/DesktopMenu";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const pathName = usePathname();
 
   return (
     <nav className="bg-blue-700 border-b border-blue-500">
@@ -52,12 +55,11 @@ const Navbar = () => {
             {/* Logo */}
             <Link className="flex flex-shrink-0 items-center" href="/">
               <Image className="h-10 w-auto" src={logo} alt="PropertyPulse" />
-
               <span className="hidden md:block text-white text-2xl font-bold ml-2">
                 WrongMove
               </span>
             </Link>
-            <DesktopMenu />
+            <DesktopMenu pathName={pathName} />
           </div>
 
           {/* Right Side Menu (Logged Out) */}
@@ -104,7 +106,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {isMobileMenuOpen && <MobileMenu />}
+      {isMobileMenuOpen && <MobileMenu pathName={pathName} />}
     </nav>
   );
 };
