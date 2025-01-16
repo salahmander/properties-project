@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar/Navbar";
 type MainLayoutPropsType = Readonly<{ children: React.ReactNode }>;
 
 export const metadata: Metadata = {
-  title: "HomeWright",
+  title: "WrongMove",
   keywords:
     "property, real estate, UK, houses for sale, flats to rent, estate agents, mortgages, property search, lettings, buy, sell, rent",
   description:
