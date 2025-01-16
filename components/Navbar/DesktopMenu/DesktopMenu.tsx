@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 const DesktopMenu = ({ pathName }: { pathName: string }) => {
-  console.log(pathName);
   return (
     <div className="hidden md:ml-6 md:block">
       <div className="flex space-x-2">
