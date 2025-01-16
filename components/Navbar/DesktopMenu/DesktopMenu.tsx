@@ -1,6 +1,11 @@
 import Link from "next/link";
 
-const DesktopMenu = ({ pathName }: { pathName: string }) => {
+type DesktopMenuProps = {
+  pathName: string;
+  isLoggedIn: boolean;
+};
+
+const DesktopMenu = ({ pathName, isLoggedIn }: DesktopMenuProps) => {
   return (
     <div className="hidden md:ml-6 md:block">
       <div className="flex space-x-2">
@@ -20,14 +25,16 @@ const DesktopMenu = ({ pathName }: { pathName: string }) => {
         >
           Properties
         </Link>
-        <Link
-          href="/properties/add"
-          className={`text-white ${
-            pathName === "/properties/add" ? "bg-black" : ""
-          } hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
-        >
-          Add Property
-        </Link>
+        {isLoggedIn && (
+          <Link
+            href="/properties/add"
+            className={`text-white ${
+              pathName === "/properties/add" ? "bg-black" : ""
+            } hover:bg-gray-900 hover:text-white rounded-md px-3 py-2`}
+          >
+            Add Property
+          </Link>
+        )}
       </div>
     </div>
   );

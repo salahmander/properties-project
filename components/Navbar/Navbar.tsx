@@ -61,7 +61,7 @@ const Navbar = () => {
                 WrongMove
               </span>
             </Link>
-            <DesktopMenu pathName={pathName} />
+            <DesktopMenu pathName={pathName} isLoggedIn={isLoggedIn} />
           </div>
 
           {!isLoggedIn && (
@@ -79,7 +79,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {isMobileMenuOpen && <MobileMenu pathName={pathName} />}
+      {isMobileMenuOpen && (
+        <MobileMenu pathName={pathName} isLoggedIn={isLoggedIn} />
+      )}
     </nav>
   );
 };
