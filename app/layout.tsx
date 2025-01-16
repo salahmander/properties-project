@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/assets/styles/globals.css";
 
-type mainLayoutPropsType = Readonly<{ children: React.ReactNode }>;
+type MainLayoutPropsType = Readonly<{ children: React.ReactNode }>;
 
 export const metadata: Metadata = {
   title: "HomeWright", 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: "Discover and compare the best properties across the UK. Whether you’re buying or renting, our platform connects you with detailed listings, expert estate agents, and real-time market insights to help you find the perfect home faste",
 };
 
-const MainLayout = ({ children }: mainLayoutPropsType) => {
+const MainLayout = ({ children }: MainLayoutPropsType) => {
   return (
     <html lang="en">
       <body>{children}</body>
