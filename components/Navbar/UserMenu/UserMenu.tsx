@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
 import profileDefault from "@/assets/images/profile.png";
 
@@ -15,7 +16,7 @@ type UserMenuProps = {
 
 const UserMenu = ({ session }: UserMenuProps) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  
+
   const profileImage = session?.user?.image;
 
   return (
@@ -101,6 +102,10 @@ const UserMenu = ({ session }: UserMenuProps) => {
               role="menuitem"
               tabIndex={-1}
               id="user-menu-item-2"
+              onClick={() => {
+                setIsProfileMenuOpen(false);
+                signOut();
+              }}
             >
               Sign Out
             </button>
