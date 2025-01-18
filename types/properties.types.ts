@@ -1,10 +1,8 @@
-// TODO: Will need to change the data to reflect properties in the UK
-
 export type Location = {
   street: string;
+  postcode: string;
   city: string;
-  state: string;
-  zipcode: string; 
+  county: string; 
 };
 
 export type Rates = {
@@ -28,7 +26,7 @@ export type Property = {
   location: Location;
   beds: number;
   baths: number;
-  square_feet: number;
+  square_meters: number;
   amenities: string[];
   rates: Rates;
   seller_info: SellerInfo;

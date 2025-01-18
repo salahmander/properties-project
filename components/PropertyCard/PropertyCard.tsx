@@ -45,7 +45,7 @@ const PropertyCard = (property: Property) => {
           <p>
             <FaRulerCombined className="md:hidden lg:inline" />{" "}
             <span className="md:hidden lg:inline">
-              {property.square_feet} sqft
+              {property.square_meters} m²
             </span>
           </p>
         </div>
@@ -83,7 +83,7 @@ const PropertyCard = (property: Property) => {
           <div className="flex align-middle gap-2 mb-4 lg:mb-0">
             <FaMapMarker className="fa-solid fa-location-dot text-lg text-orange-700" />
             <span className="text-orange-700">
-              {property.location.city} {property.location.state}{" "}
+              {property.location.city}, {property.location.county}{" "}
             </span>
           </div>
           <Link
