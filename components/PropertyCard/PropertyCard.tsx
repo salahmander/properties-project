@@ -55,7 +55,7 @@ const PropertyCard = (property: PropertyType) => {
             <p>
               <FaMoneyBill className="md:hidden lg:inline" />{" "}
               <span className="md:hidden lg:inline">
-                £{property.rates.nightly} Nightly
+                £{property.rates.nightly.toLocaleString()} Nightly
               </span>
             </p>
           )}
@@ -63,7 +63,7 @@ const PropertyCard = (property: PropertyType) => {
             <p>
               <FaMoneyBill className="md:hidden lg:inline" />{" "}
               <span className="md:hidden lg:inline">
-                £{property.rates.weekly} Weekly
+                £{property.rates.weekly.toLocaleString()} Weekly
               </span>
             </p>
           )}
@@ -71,7 +71,7 @@ const PropertyCard = (property: PropertyType) => {
             <p>
               <FaMoneyBill className="md:hidden lg:inline" />{" "}
               <span className="md:hidden lg:inline">
-                £{property.rates.monthly} Monthly
+                £{property.rates.monthly.toLocaleString()} Monthly
               </span>
             </p>
           )}
