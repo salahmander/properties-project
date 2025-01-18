@@ -1,6 +1,8 @@
+import addProperty from "@/app/actions/addProperty";
+
 const PropertyAddForm = () => {
   return (
-    <form>
+    <form action={addProperty}>
       <h2 className="text-3xl text-center font-semibold mb-6">Add Property</h2>
 
       <div className="mb-4">
@@ -66,9 +68,9 @@ const PropertyAddForm = () => {
           id="street"
           name="location.street"
           className="border rounded w-full py-2 px-3 mb-2"
-          placeholder="address"
+          placeholder="Address"
         />
-        <input
+                <input
           type="text"
           id="postcode"
           name="location.postcode"
