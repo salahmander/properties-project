@@ -11,9 +11,9 @@ import {
 
 import { getRateDisplay } from "./PropertyCard.helpers";
 
-import type { Property } from "@/types/properties.types";
+import type { PropertyType } from "@/types/properties.types";
 
-const PropertyCard = (property: Property) => {
+const PropertyCard = (property: PropertyType) => {
   return (
     <div className="rounded-xl shadow-md relative">
       <Image
