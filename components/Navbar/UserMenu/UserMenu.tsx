@@ -5,10 +5,19 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import type { Session } from "next-auth";
+import { signOut } from "next-auth/react";
+
 import profileDefault from "@/assets/images/profile.png";
 
-const UserMenu = () => {
+type UserMenuProps = {
+  session: Session | null;
+};
+
+const UserMenu = ({ session }: UserMenuProps) => {
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  const profileImage = session?.user?.image;
 
   return (
     <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
@@ -53,7 +62,9 @@ const UserMenu = () => {
             <span className="sr-only">Open user menu</span>
             <Image
               className="h-8 w-8 rounded-full"
-              src={profileDefault}
+              src={profileImage || profileDefault}
+              height={40}
+              width={40}
               alt="Profile picture"
             />
           </button>
@@ -91,6 +102,10 @@ const UserMenu = () => {
               role="menuitem"
               tabIndex={-1}
               id="user-menu-item-2"
+              onClick={() => {
+                setIsProfileMenuOpen(false);
+                signOut();
+              }}
             >
               Sign Out
             </button>

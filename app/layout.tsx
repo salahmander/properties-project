@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import "@/assets/styles/globals.css";
+
+import AuthProvider from "@/context/AuthProvider";
 
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
+
+import "@/assets/styles/globals.css";
 
 type MainLayoutPropsType = Readonly<{ children: React.ReactNode }>;
 
@@ -16,13 +19,15 @@ export const metadata: Metadata = {
 
 const MainLayout = ({ children }: MainLayoutPropsType) => {
   return (
-    <html lang="en">
-      <body>
-        <Navbar />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <AuthProvider>
+      <html lang="en">
+        <body>
+          <Navbar />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </AuthProvider>
   );
 };
 

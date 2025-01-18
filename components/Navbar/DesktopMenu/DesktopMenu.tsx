@@ -1,11 +1,13 @@
 import Link from "next/link";
 
+import type { Session } from "next-auth";
+
 type DesktopMenuProps = {
   pathName: string;
-  isLoggedIn: boolean;
+  session: Session | null;
 };
 
-const DesktopMenu = ({ pathName, isLoggedIn }: DesktopMenuProps) => {
+const DesktopMenu = ({ pathName, session }: DesktopMenuProps) => {
   return (
     <div className="hidden md:ml-6 md:block">
       <div className="flex space-x-2">
@@ -25,7 +27,7 @@ const DesktopMenu = ({ pathName, isLoggedIn }: DesktopMenuProps) => {
         >
           Properties
         </Link>
-        {isLoggedIn && (
+        {session && (
           <Link
             href="/properties/add"
             className={`text-white ${

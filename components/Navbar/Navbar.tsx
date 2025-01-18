@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { signIn, useSession, getProviders } from "next-auth/react";
 
 import logo from "@/assets/images/logo-white.png";
 
@@ -14,11 +16,24 @@ import MobileMenu from "./MobileMenu/MobileMenu";
 import DesktopMenu from "./DesktopMenu/DesktopMenu";
 import UserMenu from "./UserMenu/UserMenu";
 
+import type { ProvidersType } from "@/types/index.types";
+
 const Navbar = () => {
+  const { data: session } = useSession();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [providers, setProviders] = useState<ProvidersType | null>(null);
 
   const pathName = usePathname();
+
+  useEffect(() => {
+    const setAuthProviders = async () => {
+      const res = await getProviders();
+      setProviders(res);
+    };
+
+    setAuthProviders();
+  }, []);
 
   return (
     <nav className="bg-blue-700 border-b border-blue-500">
@@ -61,26 +76,37 @@ const Navbar = () => {
                 WrongMove
               </span>
             </Link>
-            <DesktopMenu pathName={pathName} isLoggedIn={isLoggedIn} />
+            <DesktopMenu pathName={pathName} session={session} />
           </div>
 
-          {!isLoggedIn && (
+          {!session && (
             <div className="hidden md:block md:ml-6">
               <div className="flex items-center">
-                <button className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2">
-                  <FaGoogle className="text-white mr-2" />
-                  <span>Login or Register</span>
-                </button>
+                {providers &&
+                  Object.values(providers).map((provider, index) => (
+                    <button
+                      key={index}
+                      onClick={() => signIn(provider.id)}
+                      className="flex items-center text-white bg-gray-700 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2"
+                    >
+                      <FaGoogle className="text-white mr-2" />
+                      <span>Login or Register</span>
+                    </button>
+                  ))}
               </div>
             </div>
           )}
 
-          {isLoggedIn && <UserMenu />}
+          {session && <UserMenu session={session}/>}
         </div>
       </div>
 
       {isMobileMenuOpen && (
-        <MobileMenu pathName={pathName} isLoggedIn={isLoggedIn} />
+        <MobileMenu
+          pathName={pathName}
+          session={session}
+          providers={providers}
+        />
       )}
     </nav>
   );
