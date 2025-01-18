@@ -1,4 +1,4 @@
-import type { Rates } from "@/types/properties.types";
+import type { RatesType } from "@/types/properties.types";
 
 /**
  * Returns a formatted string representing the rate based on the provided rates object.
@@ -10,7 +10,7 @@ import type { Rates } from "@/types/properties.types";
  * 
  * @returns {string} A formatted string representing the rate, prefixed with '£' and suffixed with the appropriate time period (e.g., '/mo', '/wk', '/night').
  */
-export const getRateDisplay = (rates: Rates) => {
+export const getRateDisplay = (rates: RatesType) => {
   if (rates.monthly) {
     return `£${rates.monthly.toLocaleString()}/mo`;
   } else if (rates.weekly) {

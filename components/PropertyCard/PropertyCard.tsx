@@ -11,9 +11,9 @@ import {
 
 import { getRateDisplay } from "./PropertyCard.helpers";
 
-import type { Property } from "@/types/properties.types";
+import type { PropertyType } from "@/types/properties.types";
 
-const PropertyCard = (property: Property) => {
+const PropertyCard = (property: PropertyType) => {
   return (
     <div className="rounded-xl shadow-md relative">
       <Image
@@ -45,7 +45,7 @@ const PropertyCard = (property: Property) => {
           <p>
             <FaRulerCombined className="md:hidden lg:inline" />{" "}
             <span className="md:hidden lg:inline">
-              {property.square_feet} sqft
+              {property.square_meters} m²
             </span>
           </p>
         </div>
@@ -55,7 +55,7 @@ const PropertyCard = (property: Property) => {
             <p>
               <FaMoneyBill className="md:hidden lg:inline" />{" "}
               <span className="md:hidden lg:inline">
-                £{property.rates.nightly} Nightly
+                £{property.rates.nightly.toLocaleString()} Nightly
               </span>
             </p>
           )}
@@ -63,7 +63,7 @@ const PropertyCard = (property: Property) => {
             <p>
               <FaMoneyBill className="md:hidden lg:inline" />{" "}
               <span className="md:hidden lg:inline">
-                £{property.rates.weekly} Weekly
+                £{property.rates.weekly.toLocaleString()} Weekly
               </span>
             </p>
           )}
@@ -71,7 +71,7 @@ const PropertyCard = (property: Property) => {
             <p>
               <FaMoneyBill className="md:hidden lg:inline" />{" "}
               <span className="md:hidden lg:inline">
-                £{property.rates.monthly} Monthly
+                £{property.rates.monthly.toLocaleString()} Monthly
               </span>
             </p>
           )}
@@ -83,11 +83,11 @@ const PropertyCard = (property: Property) => {
           <div className="flex align-middle gap-2 mb-4 lg:mb-0">
             <FaMapMarker className="fa-solid fa-location-dot text-lg text-orange-700" />
             <span className="text-orange-700">
-              {property.location.city} {property.location.state}{" "}
+              {property.location.city}, {property.location.county}{" "}
             </span>
           </div>
           <Link
-            href="/property"
+            href={`/properties/${property._id}`}
             className="h-[36px] bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-center text-sm"
           >
             Details
