@@ -33,9 +33,9 @@ export const authOptions = {
           email: profile.email,
           image: profile.picture,
         });
-
-        return true;
       }
+
+      return true;
     },
     // session callback that modifies the session object
     async session({ session }: { session: CustomSession }) {
