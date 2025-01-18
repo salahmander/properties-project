@@ -1,4 +1,9 @@
 import GoogleProvider from "next-auth/providers/google";
+import type { GoogleProfile } from "next-auth/providers/google";
+
+import connectDB from "@/config/database";
+import User from "@/models/User";
+import { CustomSession } from "@/types/index.types";
 
 export const authOptions = {
   providers: [
@@ -17,16 +22,30 @@ export const authOptions = {
   ],
   callbacks: {
     // Invoked on successful sign in
-    async signIn({ profile }) {
-        // Connect to the database and check if the user exists
-        // otherwise create a new user
-        // return true if the user is authenticated
+    async signIn({ profile }: { profile: GoogleProfile }) {
+      await connectDB();
+      const userExist = await User.findOne({ email: profile.email });
+
+      if (!userExist) {
+        const username = profile.name.slice(0, 20); // A google username can be between 1 and 64 characters
+        await User.create({
+          username,
+          email: profile.email,
+          image: profile.picture,
+        });
+
+        return true;
+      }
     },
     // session callback that modifies the session object
-    async session({ session }) {
-        // Get the user from the database
-        // assign user id from the session
-        // return session
+    async session({ session }: { session: CustomSession }) {
+      const user = await User.findOne({ email: session.user.email });
+
+      if (user) {
+        session.user.id = user._id.toString(); // Ensures the ID is a string
+      }
+
+      return session;
     },
   },
 };
