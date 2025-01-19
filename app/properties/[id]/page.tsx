@@ -9,6 +9,7 @@ import type { PropertyType } from "@/types/properties.types";
 
 import { FaArrowLeft } from "react-icons/fa";
 import PropertyDetails from "@/components/Property/PropertyDetails/PropertyDetails";
+import PropertyImages from "@/components/Property/PropertyImages/PropertyImages";
 
 type PropertiesPageProps = {
   params: {
@@ -31,6 +32,7 @@ const PropertyPage = async ({ params }: PropertiesPageProps) => {
           </div>
         </div>
       </section>
+      <PropertyImages images={property.images} />
       <section>
         <div className="container m-auto py-6 px-6">
           <Link
