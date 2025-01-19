@@ -1,10 +1,32 @@
 import GoogleProvider from "next-auth/providers/google";
-import type { GoogleProfile } from "next-auth/providers/google";
 
 import connectDB from "@/config/database";
 import User from "@/models/User";
-import { CustomSession } from "@/types/index.types";
+import type { CustomSession, GoogleProfileType } from "@/types/index.types";
 
+/**
+ * Authentication options for the application.
+ * 
+ * @property {Array} providers - List of authentication providers.
+ * @property {Object} callbacks - Callback functions for authentication events.
+ * 
+ * @example
+ * // Example usage of authOptions
+ * import { authOptions } from './utils/authOptions';
+ * 
+ * @typedef {Object} GoogleProfileType - Type definition for Google profile.
+ * @typedef {Object} CustomSession - Type definition for custom session.
+ * 
+ * @callback signIn
+ * @param {Object} params - Parameters for the signIn callback.
+ * @param {GoogleProfileType | undefined} params.profile - Google profile information.
+ * @returns {Promise<boolean>} - Returns true if sign in is successful.
+ * 
+ * @callback session
+ * @param {Object} params - Parameters for the session callback.
+ * @param {CustomSession} params.session - Custom session object.
+ * @returns {Promise<CustomSession>} - Returns the modified session object.
+ */
 export const authOptions = {
   providers: [
     GoogleProvider({
@@ -22,20 +44,20 @@ export const authOptions = {
   ],
   callbacks: {
     // Invoked on successful sign in
-    async signIn({ profile }: { profile: GoogleProfile }) {
+    async signIn({ profile }: { profile: GoogleProfileType | undefined }) {
       await connectDB();
-      const userExist = await User.findOne({ email: profile.email });
+      const userExist = await User.findOne({ email: profile?.email });
 
       if (!userExist) {
-        const username = profile.name.slice(0, 20); // A google username can be between 1 and 64 characters
+        const username = profile?.name.slice(0, 20); // A google username can be between 1 and 64 characters
         await User.create({
           username,
-          email: profile.email,
-          image: profile.picture,
+          email: profile?.email,
+          image: profile?.picture,
         });
-
-        return true;
       }
+
+      return true;
     },
     // session callback that modifies the session object
     async session({ session }: { session: CustomSession }) {
