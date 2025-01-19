@@ -1,9 +1,8 @@
 import GoogleProvider from "next-auth/providers/google";
-import type { GoogleProfile } from "next-auth/providers/google";
 
 import connectDB from "@/config/database";
 import User from "@/models/User";
-import { CustomSession } from "@/types/index.types";
+import type { CustomSession, GoogleProfileType } from "@/types/index.types";
 
 export const authOptions = {
   providers: [
@@ -22,16 +21,16 @@ export const authOptions = {
   ],
   callbacks: {
     // Invoked on successful sign in
-    async signIn({ profile }: { profile: GoogleProfile }) {
+    async signIn({ profile }: { profile: GoogleProfileType | undefined }) {
       await connectDB();
-      const userExist = await User.findOne({ email: profile.email });
+      const userExist = await User.findOne({ email: profile?.email });
 
       if (!userExist) {
-        const username = profile.name.slice(0, 20); // A google username can be between 1 and 64 characters
+        const username = profile?.name.slice(0, 20); // A google username can be between 1 and 64 characters
         await User.create({
           username,
-          email: profile.email,
-          image: profile.picture,
+          email: profile?.email,
+          image: profile?.picture,
         });
       }
 
