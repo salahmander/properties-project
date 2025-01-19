@@ -54,7 +54,7 @@ const PropertySchema = new Schema(
         type: String,
         required: true,
       },
-      postCode: {
+      postcode: {
         type: String,
         required: true,
       },
