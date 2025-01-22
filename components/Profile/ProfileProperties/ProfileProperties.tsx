@@ -27,12 +27,11 @@ const ProfileProperties = ({ initialProperties }: initialProperties) => {
 
     await deleteProperty(propertyId);
 
-
     const updatedProperties = properties.filter((property) => property._id !== propertyId);
 
     setProperties(updatedProperties);
 
-    toast.success('Property Deleted successfully')
+    toast.success("Property Deleted successfully");
   };
 
   return properties.map((property) => (
@@ -56,7 +55,7 @@ const ProfileProperties = ({ initialProperties }: initialProperties) => {
       </div>
       <div className="mt-2">
         <Link
-          href="/add-property.html"
+          href={`/properties/${property._id}/edit`}
           className="bg-blue-500 text-white px-3 py-3 rounded-md mr-2 hover:bg-blue-600"
         >
           Edit
