@@ -9,6 +9,7 @@ import deleteProperty from "@/app/actions/deleteProperty";
 
 import type { PropertiesType } from "@/types/properties.types";
 import type { Types } from "mongoose";
+import { toast } from "react-toastify";
 
 type initialProperties = {
   initialProperties: PropertiesType;
@@ -26,9 +27,12 @@ const ProfileProperties = ({ initialProperties }: initialProperties) => {
 
     await deleteProperty(propertyId);
 
+
     const updatedProperties = properties.filter((property) => property._id !== propertyId);
 
     setProperties(updatedProperties);
+
+    toast.success('Property Deleted successfully')
   };
 
   return properties.map((property) => (
