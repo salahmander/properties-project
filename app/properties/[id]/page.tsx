@@ -10,6 +10,7 @@ import type { PropertyType } from "@/types/properties.types";
 import { FaArrowLeft } from "react-icons/fa";
 import PropertyDetails from "@/components/Property/PropertyDetails/PropertyDetails";
 import PropertyImages from "@/components/Property/PropertyImages/PropertyImages";
+import { convertToSerializableObject } from "@/utils/convertToObject";
 
 type PropertiesPageProps = {
   params: {
@@ -19,8 +20,19 @@ type PropertiesPageProps = {
 
 const PropertyPage = async ({ params }: PropertiesPageProps) => {
   await connectDB();
-  const { id } = await params
-  const property = await Property.findById(id).lean() as unknown as PropertyType;
+  const { id } = await params;
+
+  const propertyDoc = await Property.findById(id).lean();
+  
+  if (!propertyDoc) {
+    return (
+      <h1 className="text-center text-2xl font-bold mt-10">
+        Property Not Found
+      </h1>
+    );
+  }
+
+  const property = convertToSerializableObject(propertyDoc) as PropertyType;
 
   return (
     <>
