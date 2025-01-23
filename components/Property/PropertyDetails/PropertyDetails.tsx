@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 
 import type { PropertyType } from "@/types/properties.types";
+import PropertyMap from "../PropertyMap/PropertyMap";
 
 const PropertyDetails = ({ property }: { property: PropertyType }) => {
   return (
@@ -98,7 +99,9 @@ const PropertyDetails = ({ property }: { property: PropertyType }) => {
       </div>
       {/* <!-- Map --> */}
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-        <div id="map"></div>
+        <div id="map">
+          <PropertyMap property={property} />
+        </div>
       </div>
     </main>
   );
