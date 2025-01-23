@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useSession } from "next-auth/react";
 
@@ -9,6 +9,7 @@ import { FaBookmark } from "react-icons/fa";
 import type { CustomSession } from "@/types/index.types";
 import bookmarkProperty from "@/app/actions/bookmarkProperty";
 import type { PropertyType } from "@/types/properties.types";
+import checkBookmarkStatus from "@/app/actions/checkBookmarkStatus";
 
 type BookmarkButtonProps = {
   property: PropertyType;
@@ -24,9 +25,22 @@ const BookmarkButton = ({ property }: BookmarkButtonProps) => {
   const { data: session } = useSession();
   const customSession = session as CustomSession;
 
-  const [isBookmarked, setIsBookmarked] = useState(false);
-
   const userId = customSession?.user?.id;
+
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) {
+      setIsLoading(false);
+    }
+
+    checkBookmarkStatus(property._id).then((res) => {
+      if (res.error) return toast.error(res.error);
+      if (res.isBookmarked) setIsBookmarked(res.isBookmarked);
+      setIsLoading(false);
+    });
+  }, [property._id, userId, checkBookmarkStatus]);
 
   const handleClick = async () => {
     bookmarkProperty(property._id).then((res: BookmarkPropertyResponse) => {
@@ -35,6 +49,8 @@ const BookmarkButton = ({ property }: BookmarkButtonProps) => {
       toast.success(res.message);
     });
   };
+
+  if (isLoading) return <p className="text-center">Loading...</p>;
 
   if (!userId) return;
 
