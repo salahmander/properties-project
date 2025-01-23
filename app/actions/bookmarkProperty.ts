@@ -31,16 +31,16 @@ const bookmarkProperty = async (propertyId: Types.ObjectId) => {
 
   const user = await User.findById(userId);
 
-  let isBookmarked = user.bookmark.includes(propertyId);
+  let isBookmarked = user.bookmarks.includes(propertyId);
 
   let message;
 
   if (isBookmarked) {
-    user.bookmark.pull(propertyId);
+    user.bookmarks.pull(propertyId);
     message = "Bookmark Removed";
     isBookmarked = false;
   } else {
-    user.bookmark.push(propertyId);
+    user.bookmarks.push(propertyId);
     message = "Bookmarked";
     isBookmarked = true;
   }

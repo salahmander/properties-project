@@ -31,7 +31,7 @@ const checkBookmarkStatus = async (propertyId: Types.ObjectId) => {
 
   const user = await User.findById(userId);
 
-  let isBookmarked = user.bookmark.includes(propertyId);
+  let isBookmarked = user.bookmarks.includes(propertyId);
 
   return { isBookmarked };
 };
