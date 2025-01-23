@@ -1,6 +1,8 @@
 import type { Session, Profile } from "next-auth";
 import type { BuiltInProviderType } from "next-auth/providers/index";
 import type { ClientSafeProvider, LiteralUnion } from "next-auth/react";
+import type { PropertiesType } from "./properties.types";
+import type { Types } from "mongoose";
 
 export type ProvidersType = Record<
   LiteralUnion<BuiltInProviderType, string>,
@@ -20,4 +22,15 @@ export type GoogleProfileType = Profile & {
   name: string;
   email: string;
   picture?: string;
-}
+};
+
+export type UserType = {
+  _id: string;
+  email: string;
+  username: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  bookmarks: PropertiesType;
+};
