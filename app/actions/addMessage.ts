@@ -24,7 +24,10 @@ const addMessage = async (formData: FormData) => {
   const recipient = formData.get("recipient");
 
   if (userId === recipient) {
-    return { error: "You can not send a message to yourself" };
+    return {
+      error: "You can not send a message to yourself",
+      submitted: false,
+    };
   }
 
   const newMessage = new Message({
@@ -34,12 +37,12 @@ const addMessage = async (formData: FormData) => {
     name: formData.get("name"),
     email: formData.get("email"),
     phone: formData.get("phone"),
-    body: formData.get("body"),
+    body: formData.get("message"),
   });
 
   await newMessage.save();
 
-  return { submitted: true };
+  return { message: "Message sent successfully", submitted: true };
 };
 
 export default addMessage;
