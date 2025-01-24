@@ -37,5 +37,5 @@ export type UserType = {
 
 export type GlobalContextType = {
   unreadCount: number;
-  setUnreadCount: (count: number) => void;
+  setUnreadCount: (count: number | ((prevCount: number) => number)) => void;
 };
