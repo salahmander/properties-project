@@ -1,15 +1,25 @@
 "use client";
 
-import { MessageType } from "@/types/message.types";
 import { useState } from "react";
+
+import { toast } from "react-toastify";
+
+import markMessageAsRead from "@/app/actions/markMessageAsRead";
+
+import type { MessageType } from "@/types/message.types";
 
 type MessageCardProps = {
   message: MessageType;
 };
 
 const MessageCard = ({ message }: MessageCardProps) => {
-  const [isRead, setIsRead] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
+  const [isRead, setIsRead] = useState(message.read);
+
+  const handleReadClick = async () => {
+    const read = await markMessageAsRead(message._id);
+    setIsRead(read);
+    toast.success(`Marked as ${read ? "read" : "new"}`);
+  };
 
   return (
     <div className="relative bg-white p-4 rounded-md shadow-md border border-gray-200">
@@ -43,6 +53,7 @@ const MessageCard = ({ message }: MessageCardProps) => {
         </li>
       </ul>
       <button
+        onClick={handleReadClick}
         className={`mt-4 mr-3 ${
           isRead ? "bg-gray-300" : "bg-blue-500 text-white"
         } py-1 px-3 rounded-md`}
