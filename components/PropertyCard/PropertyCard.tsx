@@ -16,14 +16,16 @@ import type { PropertyType } from "@/types/properties.types";
 const PropertyCard = (property: PropertyType) => {
   return (
     <div className="rounded-xl shadow-md relative">
-      <Image
-        src={property.images[0]}
-        alt=""
-        height="0"
-        width="0"
-        sizes="100vw"
-        className="w-full h-auto rounded-t-xl"
-      />
+      <Link href={`/properties/${property._id}`} className="cursor-pointer">
+        <Image
+          src={property.images[0]}
+          alt="main photo of the property"
+          height="0"
+          width="0"
+          sizes="100vw"
+          className="w-full h-auto rounded-t-xl"
+        />
+      </Link>
       <div className="p-4">
         <div className="text-left md:text-center lg:text-left mb-6">
           <div className="text-gray-600">{property.type}</div>
