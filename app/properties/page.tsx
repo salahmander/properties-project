@@ -1,11 +1,12 @@
 import connectDB from "@/config/database";
+
 import Property from "@/models/Property";
 
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
+import Pagination from "@/components/Pagination/Pagination";
+import PropertySearchForm from "@/components/PropertySearchForm/PropertySearchForm";
 
 import type { PropertiesType } from "@/types/properties.types";
-import Pagination from "@/components/Pagination/Pagination";
-import { parse } from "path";
 
 type PropertiesPageProps = {
   searchParams: {
@@ -19,8 +20,8 @@ const PropertiesPage = async ({ searchParams }: PropertiesPageProps) => {
 
   const { pageSize = "9", page = "1" } = await searchParams;
 
-  const pageSizeInt = parseInt(pageSize)
-  const pageInt = parseInt(page)
+  const pageSizeInt = parseInt(pageSize);
+  const pageInt = parseInt(page);
 
   const skip = (pageInt - 1) * pageSizeInt;
 
@@ -34,6 +35,12 @@ const PropertiesPage = async ({ searchParams }: PropertiesPageProps) => {
   const showPagination = total > pageSizeInt;
 
   return (
+    <>
+      <section className="bg-blue-700 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-start">
+          <PropertySearchForm />
+        </div>
+      </section>
       <section className="px-4 py-6">
         <div className="container-xl lg:container m-auto px-4 py-6">
           <h1 className="text-2xl mb-4">Browse Properties</h1>
@@ -55,6 +62,7 @@ const PropertiesPage = async ({ searchParams }: PropertiesPageProps) => {
           )}
         </div>
       </section>
+    </>
   );
 };
 
