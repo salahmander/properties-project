@@ -34,3 +34,8 @@ export type UserType = {
   __v: number;
   bookmarks: PropertiesType;
 };
+
+export type GlobalContextType = {
+  unreadCount: number;
+  setUnreadCount: (count: number) => void;
+};

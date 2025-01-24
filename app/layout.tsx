@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 
 import "@/assets/styles/globals.css";
+import { GlobalProvider } from "@/context/GlobalContext";
 
 type MainLayoutPropsType = Readonly<{ children: React.ReactNode }>;
 
@@ -23,14 +24,16 @@ export const metadata: Metadata = {
 const MainLayout = ({ children }: MainLayoutPropsType) => {
   return (
     <AuthProvider>
-      <html lang="en">
-        <body>
-          <Navbar />
-          {children}
-          <Footer />
-          <ToastContainer />
-        </body>
-      </html>
+      <GlobalProvider>
+        <html lang="en">
+          <body>
+            <Navbar />
+            {children}
+            <Footer />
+            <ToastContainer />
+          </body>
+        </html>
+      </GlobalProvider>
     </AuthProvider>
   );
 };
