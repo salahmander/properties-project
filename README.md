@@ -1,6 +1,14 @@
 # 🏡  Real Estate Full-Stack Application
 
-A **full-stack real estate application** built with **Next.js**, to deeper my understanding of **Next.js** and to explore **server-side rendering (SSR), static site generation (SSG), authentication, and database integration**. Features include **Google authentication (NextAuth), property listing CRUD, Cloudinary image uploads, Mapbox integration, internal messaging, bookmarking, and social media sharing**. Designed with **Tailwind for responsive UI**, this project deepened my expertise in **Next.js, MongoDB, and modern web development**. 
+A full-stack real estate application built to enhance my
+understanding of Next.js. Also, to explore server-side rendering
+(SSR), static site generation (SSG), authentication, and database
+integration. Features include Google authentication (NextAuth),
+property listing CRUD, Cloudinary image uploads, Mapbox
+integration, internal messaging, bookmarking, and social media
+sharing. Designed with Tailwind for responsive UI, this project
+deepened my expertise in Next.js, MongoDB, and modern web
+development.
 
 
 ## Features
