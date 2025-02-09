@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏡  Real Estate Full-Stack Application
 
-## Getting Started
+A **full-stack real estate application** built with **Next.js**, to deeper my understanding of **Next.js** and to explore **server-side rendering (SSR), static site generation (SSG), authentication, and database integration**. Features include **Google authentication (NextAuth), property listing CRUD, Cloudinary image uploads, Mapbox integration, internal messaging, bookmarking, and social media sharing**. Designed with **Tailwind for responsive UI**, this project deepened my expertise in **Next.js, MongoDB, and modern web development**. 
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- **User authentication** with Google & NextAuth
+- **User authorization** with protected routes
+- **Server actions** & database interactions
+- **User profile** with user listings
+- **Property listing CRUD** operations
+- **Multiple property image uploads**
+- **Cloudinary integration** for media storage
+- **Property search** functionality
+- **Internal messaging** with unread notifications
+- **Photoswipe image gallery**
+- **Mapbox integration** for interactive maps
+- **Toast notifications** for user feedback
+- **Property bookmarking** (saved properties)
+- **Property sharing** to social media
+- **Loading spinners** for better UX
+- **Responsive design** using Tailwind CSS
+- **Custom 404 page** for enhanced user experience
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Prerequisites
+Ensure you have the following installed:
+- Node.js (latest LTS recommended)
+- MongoDB
+- Cloudinary account (for image storage)
+- Mapbox API key
 
-## Learn More
+### Setup & Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/salahmander/properties-project.git
+   cd properties-project
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Create a `.env.local` file and configure your environment variables:
+   ```env
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=your-secret-key
+   MONGODB_URI=your-mongodb-uri
+   CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+   CLOUDINARY_API_KEY=your-cloudinary-api-key
+   CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+   MAPBOX_ACCESS_TOKEN=your-mapbox-access-token
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
-## Deploy on Vercel
+5. Open `http://localhost:3000` in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+- **Start development server:** `npm run dev`
+- **Build for production:** `npm run build`
+- **Start production server:** `npm run start`
+- **Run linter:** `npm run lint`
