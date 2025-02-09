@@ -18,9 +18,7 @@ import ShareButton from "@/components/Buttons/ShareButton/ShareButton";
 import PropertyContactForm from "@/components/Property/PropertyContactForm/PropertyContactForm";
 
 type PropertiesPageProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
 const PropertyPage = async ({ params }: PropertiesPageProps) => {

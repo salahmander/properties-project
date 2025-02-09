@@ -9,9 +9,7 @@ import { convertToSerializableObject } from "@/utils/convertToObject";
 import type { PropertyType } from "@/types/properties.types";
 
 type PropertyEditPageProp = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
 const PropertyEditPage = async ({ params }: PropertyEditPageProp) => {
