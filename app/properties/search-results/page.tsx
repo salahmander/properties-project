@@ -14,10 +14,7 @@ import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import type { PropertiesType } from "@/types/properties.types";
 
 type SearchResultsPageParams = {
-  searchParams: {
-    location?: string;
-    propertyType?: string;
-  };
+  searchParams: Promise<{ location?: string; propertyType?: string }>;
 };
 
 const SearchResultsPage = async ({ searchParams }: SearchResultsPageParams) => {

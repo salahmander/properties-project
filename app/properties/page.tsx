@@ -9,10 +9,7 @@ import PropertySearchForm from "@/components/PropertySearchForm/PropertySearchFo
 import type { PropertiesType } from "@/types/properties.types";
 
 type PropertiesPageProps = {
-  searchParams: {
-    pageSize: string;
-    page: string;
-  };
+  searchParams: Promise<{ pageSize: string; page: string }>;
 };
 
 const PropertiesPage = async ({ searchParams }: PropertiesPageProps) => {
